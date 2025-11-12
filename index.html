@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double Elimination Bracket</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Double Elimination Bracket Generator</h1>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('teams')">Team Management</button>
+            <button class="tab-btn" onclick="switchTab('bracket')">Tournament Bracket</button>
+            <button class="tab-btn" onclick="switchTab('schedule')">Schedule</button>
+            <button class="tab-btn" onclick="switchTab('rankings')">Top 5 Winners</button>
+        </div>
+
+        <div id="teamsTab" class="tab-content active">
+            <div class="team-input-section">
+                <h2>Add Teams</h2>
+                <div id="warningMessage" class="warning-message" style="display: none;"></div>
+                <div class="input-group">
+                    <textarea id="teamNameInput" placeholder="Enter team names (one per line, or use commas, semicolons, or pipes to separate)"></textarea>
+                </div>
+                <button onclick="addTeams()" class="add-btn">Add Teams</button>
+                <div id="teamList" class="team-list"></div>
+                <button onclick="generateBracket()" class="generate-btn">Generate Bracket</button>
+            </div>
+        </div>
+
+        <div id="bracketTab" class="tab-content">
+            <div id="winnerDisplay" class="winner-display" style="display: none;">
+                <h2>🏆 Tournament Champion 🏆</h2>
+                <div id="championName" class="champion-name"></div>
+            </div>
+
+            <div class="bracket-section">
+                <h2 style="color: #667eea; margin-bottom: 20px;">Tournament Bracket</h2>
+                <div class="bracket-container">
+                    <div class="bracket-column">
+                        <h3>Winners Bracket</h3>
+                        <div id="winnersBracket"></div>
+                    </div>
+                    <div class="bracket-column">
+                        <h3>Losers Bracket</h3>
+                        <div id="losersBracket"></div>
+                    </div>
+                    <div class="bracket-column">
+                        <h3>Finals</h3>
+                        <div id="finalsBracket"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="scheduleTab" class="tab-content">
+            <div class="bracket-section">
+                <h2>Parallel Game Schedule</h2>
+                <p style="color: #7f8c8d; margin-bottom: 20px;">Games in the same time slot can be played simultaneously to save time</p>
+                <div id="scheduleContent"></div>
+            </div>
+        </div>
+
+        <div id="rankingsTab" class="tab-content">
+            <div class="bracket-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2 style="margin: 0;">Top Winners</h2>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <label for="topCount" style="color: #667eea; font-weight: 600;">Show top:</label>
+                        <select id="topCount" onchange="renderRankings()" style="padding: 8px 12px; border: 2px solid #667eea; border-radius: 8px; font-size: 16px; cursor: pointer; background: white;">
+                            <option value="3">3</option>
+                            <option value="5" selected>5</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                            <option value="all">All</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="rankingsContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="bracket-logic.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
